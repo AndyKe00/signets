@@ -1,7 +1,7 @@
 import './Entete.scss';
 import { Avatar } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import firebase from 'firebase/app';
+import { instanceFirebaseAuth } from '../services/firebase-initialisation';
 
 
 export default function Entete(props) {
@@ -14,8 +14,8 @@ export default function Entete(props) {
         variant="outlined"
         size="small"
         className="btnDeconnexion"
-        onClick={() => firebase.auth().signOut()}
-        >Deconnexion </ Button>
+        onClick={() => instanceFirebaseAuth.signOut()}
+        >Déconnexion </ Button>
       
       
       </div>

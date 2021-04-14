@@ -3,6 +3,9 @@
 # Ignorer .eslintcache
 .eslintcache
 
+# tout ignorer
+../services/config-secret.js
+
 # dependencies
 /node_modules
 /.pnp

@@ -6,14 +6,30 @@ import AddIcon from '@material-ui/icons/Add';
 import Accueil from './Accueil';
 import { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
+import { instanceFirestore, instanceFirebaseAuth } from '../services/firebase-initialisation';
+import { collUtil } from '../services/config';
 
 export default function Appli() {
   const [utilisateur, setUtilisateur] = useState(null);
 
   useEffect(
     () => {
-      firebase.auth().onAuthStateChanged(
-        util => setUtilisateur(util)
+      instanceFirebaseAuth.onAuthStateChanged(
+        util => {
+          // Changer l'etat de l'utilisateur
+          setUtilisateur(util);
+
+          // Si l'utilisateur vient de se loguer, creer son profil
+          // dans Firestore si c'est un nouveau utilisateur
+          // ou rien faire s'il existe deja.
+          if (util != null)
+          {
+            instanceFirestore.collection(collUtil).doc(util.uid).set(
+              {nom: util.displayName, courriel: util.email},
+              {merge: true}
+            );
+          }
+        }
       )
     }
   , []);

@@ -1,6 +1,6 @@
 import './Accueil.scss';
 import firebase from 'firebase/app';
-import { instanceFbUI } from '../data/firebase';
+import { instanceFirebaseUI } from '../services/firebase-initialisation';
 import 'firebaseui/dist/firebaseui.css';
 import { useEffect } from 'react';
 
@@ -8,7 +8,7 @@ export default function Accueil()
 {
 
     useEffect(
-        () => instanceFbUI.start('#fbui', {
+        () => instanceFirebaseUI.start('#fbui', {
             signInOptions: [
                 firebase.auth.GoogleAuthProvider.PROVIDER_ID,
                 firebase.auth.GithubAuthProvider.PROVIDER_ID
