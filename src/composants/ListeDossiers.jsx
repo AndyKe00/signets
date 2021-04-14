@@ -2,7 +2,7 @@ import './ListeDossiers.scss';
 // import dossTab from '../data/liste-dossiers.json';
 import Dossier from './Dossier';
 import { useState, useEffect } from 'react';
-import { instanceFirestore } from '../services/firebase-initialisation';
+import * as crudDossiers from '../services/crud-dossiers';
 
 
 // 3) Exécuter une requête sur la collection 'dossier-temp' pour lire l'info des dossiers disponibles
@@ -19,18 +19,15 @@ useEffect(
 );
 */ 
 
-export default function ListeDossiers() {
+export default function ListeDossiers(props) {
+const utilisateur = props.utilisateur;
 
   const [dossiers, setDossiers] = useState([]);
 
   useEffect(
-    () => instanceFirestore.collection('dossier-temp').get().then(
-            reponse => {
-              let dossiersTemp = [];                                                                                                                                                                                                                                            
-              reponse.forEach(doc => dossiersTemp.push({id: doc.id, ...doc.data()}));
-              setDossiers(dossiersTemp);
-            }
-          )  
+    () => crudDossiers.lireTout(utilisateur.uid).then(
+      lesDossiers => setDossiers(lesDossiers)
+    )
     , []
   );
 

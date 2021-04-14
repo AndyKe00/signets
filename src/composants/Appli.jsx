@@ -22,7 +22,7 @@ export default function Appli() {
           // Si l'utilisateur vient de se loguer, creer son profil
           // dans Firestore si c'est un nouveau utilisateur
           // ou rien faire s'il existe deja.
-          if (util != null)
+          if (util !== null)
           {
             instanceFirestore.collection(collUtil).doc(util.uid).set(
               {nom: util.displayName, courriel: util.email},
@@ -41,7 +41,7 @@ export default function Appli() {
         <>
           <Entete utilisateur={utilisateur} />
           <section className="contenu-principal">
-            <ListeDossiers />
+            <ListeDossiers utilisateur={utilisateur} />
             <Fab className="ajoutRessource" color="primary" aria-label="Ajouter dossier">
               <AddIcon />
             </Fab>
