@@ -4,7 +4,7 @@
 .eslintcache
 
 # tout ignorer
-../services/config-secret.js
+/src/services/config-secret.js
 
 # dependencies
 /node_modules
